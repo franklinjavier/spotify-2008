@@ -2,3 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  :root {
+    --background: #444;
+    --foreground: #eee;
+    --accent: #86efac;
+    --muted: #888;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased selection:bg-green-500 selection:text-white;
+    font-feature-settings:
+      'rlig' 1,
+      'calt' 1;
+  }
+}

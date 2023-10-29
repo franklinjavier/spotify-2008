@@ -1,5 +1,6 @@
 import type { LoaderFunctionArgs, MetaFunction } from '@remix-run/node'
 import { Form, useLoaderData } from '@remix-run/react'
+import { Title } from '~/components/title'
 import { spotifyStrategy } from '~/services/auth'
 
 export const meta: MetaFunction = () => {
@@ -17,10 +18,10 @@ export default function Index() {
     <main>
       <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
         <div className="text-center">
-          <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">Spotify 2008</h1>
-          <p className="mt-6 text-lg leading-8 text-gray-600">
+          <Title>Spotify 2008</Title>
+          <p className="mt-6 text-lg leading-8 text-muted">
             Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit
-            sunt amet fugiat veniam occaecat fugiat aliqua.
+            sunt amet fugiat veniam <span className="text-accent">occaecat fugiat</span> aliqua.
           </p>
         </div>
         {user ? <p>You are logged in as: {user?.email}</p> : <p>You are not logged in yet!</p>}

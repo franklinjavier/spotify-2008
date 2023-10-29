@@ -1,8 +1,18 @@
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+export default {
   content: ['./app/**/*.{ts,tsx,jsx,js}'],
   theme: {
-    extend: {},
+    fontFamily: {
+      sans: ['Lucida Sans Unicode', 'Lucida Grande'],
+    },
+    extend: {
+      colors: {
+        background: 'var(--background)',
+        foreground: 'var(--foreground)',
+        accent: 'var(--accent)',
+        muted: 'var(--muted)',
+      },
+    },
   },
   plugins: [],
 }
