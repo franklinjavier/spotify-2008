@@ -8,7 +8,7 @@ export function Signin() {
     <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
       <div className="text-center">
         <Title>Spotify 2008</Title>
-        <p className="mt-6 text-lg leading-8 text-muted">Best Spotify's UI/UX of all time!</p>
+        <p className="mt-6 text-lg leading-8 text-muted">Spotify's best UX/UI of all time!</p>
         <Form action={user ? '/logout' : '/auth/spotify'} method="post">
           <button>{user ? 'Logout' : 'Log in with Spotify'}</button>
         </Form>
