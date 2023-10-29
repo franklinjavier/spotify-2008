@@ -9,7 +9,7 @@ export function SearchPlaylists() {
       {searchResult.playlists?.items.map((album) => (
         <div className="flex min-w-[150px] flex-col gap-1 text-xs" key={album.id}>
           <img alt={album.name} className="object-cover h-40" src={album.images[0].url} />
-          {album.name}
+          <span className="line-clamp-2">{album.name}</span>
           <span className="text-muted">{album.owner.display_name}</span>
         </div>
       ))}

@@ -11,7 +11,7 @@ export function SearchArtists() {
           {album.images?.[0] && (
             <img alt={album.name} className="object-cover h-40" src={album.images[0].url} />
           )}
-          {album.name}
+          <span className="line-clamp-2">{album.name}</span>
         </div>
       ))}
     </div>
