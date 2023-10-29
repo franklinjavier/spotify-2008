@@ -5,13 +5,14 @@
 @layer base {
   :root {
     --background: #444;
-    --foreground: #eee;
+    --primary: #eee;
+    --secondary: #222;
     --accent: #86efac;
     --muted: #888;
   }
 
   body {
-    @apply bg-background text-foreground antialiased selection:bg-green-500 selection:text-white text-sm;
+    @apply bg-background text-primary antialiased selection:bg-green-500 selection:text-white text-sm text-shadow shadow-black;
     font-feature-settings:
       'rlig' 1,
       'calt' 1;

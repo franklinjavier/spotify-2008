@@ -1,10 +1,10 @@
 import axios, { type AxiosError } from 'axios'
 
-export const api = axios.create()
-export const http = axios.create()
+export const api = axios.create({
+  baseURL: 'https://api.spotify.com/v1',
+})
 
 api.interceptors.response.use(null, responseInterceptor)
-http.interceptors.response.use(null, responseInterceptor)
 
 export function handleError(err: AxiosError) {
   const error = err.response?.data || { message: err.message }
