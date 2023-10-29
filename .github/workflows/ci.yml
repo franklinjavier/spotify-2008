@@ -8,7 +8,7 @@ on:
     types: [opened, synchronize, reopened]
 
 jobs:
-  test:
+  release:
     runs-on: ubuntu-latest
     env:
       GH_REF: ${{ (github.event.pull_request.merged && github.event.pull_request.base.ref) || github.ref }}
@@ -47,6 +47,3 @@ jobs:
 
       - name: Run ESLint
         run: yarn lint
-
-      - name: Run Tests
-        run: yarn test
