@@ -1,9 +1,15 @@
-import { type LinksFunction, type LoaderFunctionArgs, json } from '@remix-run/node'
+import { json } from '@remix-run/node'
+import type { LinksFunction, LoaderFunctionArgs, MetaFunction } from '@remix-run/node'
 import { Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration, useLoaderData } from '@remix-run/react'
 
 import { Layout } from './components/layout'
+import { Signin } from './components/signin'
 import styles from './globals.css'
 import { getSessionUser } from './services/user'
+
+export const meta: MetaFunction = () => {
+  return [{ title: 'Spotify 2008' }, { name: 'description', content: 'Spotify 2008' }]
+}
 
 export const links: LinksFunction = () => [
   { rel: 'stylesheet', href: styles },
@@ -44,7 +50,7 @@ export default function App() {
             <Outlet />
           </Layout>
         )}
-        {!user && <Outlet />}
+        {!user && <Signin />}
         <ScrollRestoration />
         <Scripts />
         <LiveReload />

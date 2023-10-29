@@ -1,12 +1,6 @@
-import { type LoaderFunctionArgs, type MetaFunction, json } from '@remix-run/node'
-import { Home } from '~/components/home'
-import { Signin } from '~/components/signin'
-import { useUser } from '~/hooks'
-import { getNewReleases } from '~/modules/new-releases.server'
-
-export const meta: MetaFunction = () => {
-  return [{ title: 'Spotify 2008' }, { name: 'description', content: 'Spotify 2008' }]
-}
+import { type LoaderFunctionArgs, json } from '@remix-run/node'
+import { Title } from '~/components/title'
+import { NewReleases, getNewReleases } from '~/modules/new-releases'
 
 export async function loader({ request }: LoaderFunctionArgs) {
   const newReleases = await getNewReleases()
@@ -14,12 +8,10 @@ export async function loader({ request }: LoaderFunctionArgs) {
 }
 
 export default function Index() {
-  const user = useUser()
-
   return (
-    <main>
-      {!user && <Signin />}
-      {user && <Home />}
+    <main className="space-y-3">
+      <Title className="text-accent text-[16px] font-semibold">What's new?</Title>
+      <NewReleases />
     </main>
   )
 }
