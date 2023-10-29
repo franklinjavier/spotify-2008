@@ -1,7 +1,9 @@
-import type { LinksFunction, LoaderFunctionArgs } from '@remix-run/node'
-import { Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration } from '@remix-run/react'
+import { type LinksFunction, type LoaderFunctionArgs, json } from '@remix-run/node'
+import { Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration, useLoaderData } from '@remix-run/react'
 
+import { Layout } from './components/layout'
 import styles from './globals.css'
+import { getSessionUser } from './services/user'
 
 export const links: LinksFunction = () => [
   { rel: 'stylesheet', href: styles },
@@ -13,10 +15,12 @@ export const links: LinksFunction = () => [
 ]
 
 export async function loader({ request }: LoaderFunctionArgs) {
-  return true
+  const user = await getSessionUser(request)
+  return json({ user })
 }
 
 export default function App() {
+  const { user } = useLoaderData<typeof loader>()
   return (
     <html lang="en">
       <head>
@@ -35,7 +39,12 @@ export default function App() {
             __html: `document.querySelectorAll("html > script").forEach((s) => s.parentNode?.removeChild(s));`,
           }}
         />
-        <Outlet />
+        {user && (
+          <Layout>
+            <Outlet />
+          </Layout>
+        )}
+        {!user && <Outlet />}
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
