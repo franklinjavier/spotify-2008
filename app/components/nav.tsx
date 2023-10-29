@@ -14,15 +14,13 @@ function NavLink({ to, children }: NavLinkProps) {
 
 export function Nav() {
   return (
-    <aside className="w-72 p-2">
-      <nav>
-        <NavLink to="/">
-          <Home size={16} /> Home
-        </NavLink>
-        <NavLink to="/">
-          <Radio size={16} /> Radio
-        </NavLink>
-      </nav>
-    </aside>
+    <nav>
+      <NavLink to="/">
+        <Home size={16} /> Home
+      </NavLink>
+      <NavLink to="/">
+        <Radio size={16} /> Radio
+      </NavLink>
+    </nav>
   )
 }
