@@ -21,7 +21,7 @@
   "dependencies": {
     "@remix-run/node": "^2.1.0",
     "@remix-run/react": "^2.1.0",
-    "@remix-run/serve": "^2.1.0",
+    "@remix-run/serve": "^2.2.0",
     "@spotify/web-api-ts-sdk": "^1.1.2",
     "isbot": "^3.7.0",
     "jsonwebtoken": "^9.0.2",
