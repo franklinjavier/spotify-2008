@@ -36,8 +36,8 @@ dependencies:
     specifier: ^3.6.0
     version: 3.6.0(@remix-run/react@2.1.0)(@remix-run/server-runtime@2.1.0)
   remix-auth-spotify:
-    specifier: ^1.3.0
-    version: 1.3.0(@remix-run/server-runtime@2.1.0)(remix-auth@3.6.0)
+    specifier: ^1.3.2
+    version: 1.3.2(@remix-run/server-runtime@2.1.0)(remix-auth@3.6.0)
 
 devDependencies:
   '@remix-run/dev':
@@ -5744,8 +5744,8 @@ packages:
       - supports-color
     dev: false
 
-  /remix-auth-spotify@1.3.0(@remix-run/server-runtime@2.1.0)(remix-auth@3.6.0):
-    resolution: {integrity: sha512-PrdJxix0mxDX6gNIwvpmUVSJRmAneuUo9L7gX/MTUwR9CaUQ7mYI4nSi2ufAKrTSZaq8nk7y8o+lTayCWHfM3Q==}
+  /remix-auth-spotify@1.3.2(@remix-run/server-runtime@2.1.0)(remix-auth@3.6.0):
+    resolution: {integrity: sha512-LUYkxCH2oiE58Y5Y4gbtPE735ZaImY6h6yBbrckdYjBjkJMfGFFBDTK3lPxBJtFeV7JJp6tw9r7BZ+gq5oPzDg==}
     peerDependencies:
       '@remix-run/server-runtime': '>=1.1.0'
       remix-auth: '>=3.2.2'
