@@ -26,7 +26,7 @@
     "axios": "^1.13.4",
     "isbot": "^5",
     "jsonwebtoken": "^9",
-    "lucide-react": "^0.469",
+    "lucide-react": "^0.563",
     "react": "^19",
     "react-dom": "^19",
     "react-router": "^7",
