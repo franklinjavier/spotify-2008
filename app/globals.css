@@ -1,20 +1,62 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+  --font-family-sans: 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;
+
+  /* Spotify 2008 color palette */
+  --color-background: #4a4a4a;
+  --color-background-dark: #282828;
+  --color-background-sidebar: #1e1e1e;
+  --color-background-header: #5a5a5a;
+  --color-background-menu: #3a3a3a;
+  --color-background-player: #282828;
+  --color-primary: #fff;
+  --color-secondary: #1a1a1a;
+  --color-accent: #a0c644;
+  --color-accent-hover: #b8d456;
+  --color-muted: #aaa;
+  --color-border: #1a1a1a;
+  --color-sidebar-active: #3a3a3a;
+  --color-tab-active: #4a4a4a;
+
+  /* Shadows */
+  --shadow-input: inset 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-text: 0 1px 1px rgba(0, 0, 0, 0.8);
+
+  /* Spacing */
+  --sidebar-width: 200px;
+  --header-height: 22px;
+  --tabs-height: 28px;
+  --player-height: 64px;
+}
 
 @layer base {
-  :root {
-    --background: #444;
-    --primary: #eee;
-    --secondary: #222;
-    --accent: #86efac;
-    --muted: #999;
+  body {
+    @apply bg-background text-primary antialiased text-sm;
+    text-shadow: var(--shadow-text);
+    font-feature-settings: 'rlig' 1, 'calt' 1;
   }
 
-  body {
-    @apply bg-background text-primary antialiased selection:bg-green-500 selection:text-white text-sm text-shadow shadow-black;
-    font-feature-settings:
-      'rlig' 1,
-      'calt' 1;
+  ::selection {
+    @apply bg-accent text-black;
+  }
+
+  /* Scrollbar styling for vintage look */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #2a2a2a;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #555;
+    border-radius: 2px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #666;
   }
 }

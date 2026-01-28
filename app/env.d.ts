@@ -1,0 +1,7 @@
+/// <reference types="vite/client" />
+
+declare module "react-router" {
+  interface AppLoadContext {}
+}
+
+export {};

@@ -1,9 +1,13 @@
-import type { LoaderFunctionArgs } from '@remix-run/node'
-import { authenticator } from '~/services/auth'
+import type { Route } from './+types/auth.spotify.callback'
+import { redirect } from 'react-router'
+import { handleCallback, createUserSession } from '~/services/auth'
 
-export function loader({ request }: LoaderFunctionArgs) {
-  return authenticator.authenticate('spotify', request, {
-    successRedirect: '/',
-    failureRedirect: '/login',
-  })
+export async function loader({ request }: Route.LoaderArgs) {
+  try {
+    const user = await handleCallback(request)
+    return createUserSession(request, user, '/')
+  } catch (error) {
+    console.error('OAuth callback error:', error)
+    throw redirect('/login')
+  }
 }

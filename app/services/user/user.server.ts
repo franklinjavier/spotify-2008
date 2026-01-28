@@ -1,11 +1,15 @@
-import { redirect } from '@remix-run/node'
-import { spotifyStrategy } from '../auth'
+import { redirect } from 'react-router'
+import { isAuthenticated } from '../auth'
 import { commitSession, getSession } from '../session/session.server'
 import { LOGIN_URL } from '~/lib/constants'
 
 export async function getSessionUser(request: Request) {
-  const session = await spotifyStrategy.getSession(request)
-  return session?.user
+  const userData = await isAuthenticated(request)
+  return userData?.user
+}
+
+export async function getFullSessionUser(request: Request) {
+  return await isAuthenticated(request)
 }
 
 export async function getLoggedInUser(request: Request) {

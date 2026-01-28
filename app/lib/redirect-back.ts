@@ -1,4 +1,4 @@
-import { redirect } from '@remix-run/node'
+import { redirect } from 'react-router'
 
 export function redirectBack(request: Request) {
   const url = new URL(request.url)

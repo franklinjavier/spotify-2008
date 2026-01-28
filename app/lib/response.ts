@@ -1,4 +1,4 @@
-import { json } from '@remix-run/node'
+import { data as dataResponse } from 'react-router'
 
 /**
  * Create a response receiving a JSON object with the status code 400.
@@ -9,7 +9,7 @@ import { json } from '@remix-run/node'
  * }
  */
 export function badRequest<Data = unknown>(data: Data, init?: Omit<ResponseInit, 'status'>) {
-  return json<Data>(data, { ...init, status: 400 })
+  return dataResponse<Data>(data, { ...init, status: 400 })
 }
 
 /**
@@ -21,7 +21,7 @@ export function badRequest<Data = unknown>(data: Data, init?: Omit<ResponseInit,
  * }
  */
 export function unauthorized<Data = unknown>(data: Data, init?: Omit<ResponseInit, 'status'>) {
-  return json<Data>(data, { ...init, status: 401 })
+  return dataResponse<Data>(data, { ...init, status: 401 })
 }
 
 /**
@@ -33,7 +33,7 @@ export function unauthorized<Data = unknown>(data: Data, init?: Omit<ResponseIni
  * }
  */
 export function forbidden<Data = unknown>(data: Data, init?: Omit<ResponseInit, 'status'>) {
-  return json<Data>(data, { ...init, status: 403 })
+  return dataResponse<Data>(data, { ...init, status: 403 })
 }
 
 /**
@@ -45,7 +45,7 @@ export function forbidden<Data = unknown>(data: Data, init?: Omit<ResponseInit, 
  * }
  */
 export function notFound<Data = unknown>(data: Data, init?: Omit<ResponseInit, 'status'>) {
-  return json<Data>(data, { ...init, status: 404 })
+  return dataResponse<Data>(data, { ...init, status: 404 })
 }
 
 /**
@@ -57,7 +57,7 @@ export function notFound<Data = unknown>(data: Data, init?: Omit<ResponseInit, '
  * }
  */
 export function unprocessableEntity<Data = unknown>(data: Data, init?: Omit<ResponseInit, 'status'>) {
-  return json<Data>(data, { ...init, status: 422 })
+  return dataResponse<Data>(data, { ...init, status: 422 })
 }
 
 export type ImageType =
@@ -81,7 +81,7 @@ export type ImageType =
  * }
  */
 export function image(
-  content: Buffer | ArrayBuffer | ReadableStream,
+  content: ArrayBuffer | ReadableStream,
   { type, ...init }: ResponseInit & { type: ImageType },
 ): Response {
   let headers = new Headers(init.headers)

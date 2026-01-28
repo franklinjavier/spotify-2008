@@ -1,12 +1,12 @@
-import type { ActionFunctionArgs } from '@remix-run/node'
-import { redirect } from '@remix-run/node'
+import type { Route } from './+types/logout'
+import { redirect } from 'react-router'
 import { notFound } from '~/lib/response'
 
 import { destroySession, getSession } from '~/services/session'
 
-export async function action({ request }: ActionFunctionArgs) {
+export async function action({ request }: Route.ActionArgs) {
   const session = await getSession(request)
-  return redirect('/', {
+  throw redirect('/', {
     headers: {
       'Set-Cookie': await destroySession(session),
     },

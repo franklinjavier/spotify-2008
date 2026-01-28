@@ -1,32 +1,52 @@
-import { json } from '@remix-run/node'
-import type { LinksFunction, LoaderFunctionArgs, MetaFunction } from '@remix-run/node'
-import { Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration, useLoaderData } from '@remix-run/react'
-
+import type { Route } from "./+types/root"
+import { Links, Meta, Outlet, Scripts, ScrollRestoration } from 'react-router'
+import "./globals.css"
 import { Layout } from './components/layout'
 import { Signin } from './components/signin'
-import styles from './globals.css'
-import { getSessionUser } from './services/user'
+import { PlayerProvider } from './contexts/player-context'
+import { getFullSessionUser } from './services/user/user.server'
+import { getUserPlaylists, getUserRecentlyPlayed } from './services/spotify/spotify.server'
 
-export const meta: MetaFunction = () => {
-  return [{ title: 'Spotify 2008' }, { name: 'description', content: 'Spotify 2008' }]
+export function meta(): Route.MetaDescriptors {
+  return [
+    { title: 'Spotify 2008' },
+    { name: 'description', content: 'Spotify 2008' }
+  ]
 }
 
-export const links: LinksFunction = () => [
-  { rel: 'stylesheet', href: styles },
-  {
-    rel: 'icon',
-    href: '/logo.png',
-    type: 'image/png',
-  },
-]
-
-export async function loader({ request }: LoaderFunctionArgs) {
-  const user = await getSessionUser(request)
-  return json({ user })
+export function links(): Route.LinkDescriptors {
+  return [
+    {
+      rel: 'icon',
+      href: '/logo.png',
+      type: 'image/png',
+    },
+  ]
 }
 
-export default function App() {
-  const { user } = useLoaderData<typeof loader>()
+export async function loader({ request }: Route.LoaderArgs) {
+  const sessionUser = await getFullSessionUser(request)
+
+  if (!sessionUser) {
+    return { user: null, accessToken: null, playlists: [], recentTracks: [] }
+  }
+
+  const { user, accessToken } = sessionUser
+
+  try {
+    const [playlists, recentTracks] = await Promise.all([
+      getUserPlaylists(accessToken, 20).catch(() => []),
+      getUserRecentlyPlayed(accessToken, 5).catch(() => []),
+    ])
+
+    return { user, accessToken, playlists, recentTracks }
+  } catch {
+    return { user, accessToken, playlists: [], recentTracks: [] }
+  }
+}
+
+export default function App({ loaderData }: Route.ComponentProps) {
+  const { user, accessToken } = loaderData
   return (
     <html lang="en">
       <head>
@@ -46,14 +66,15 @@ export default function App() {
           }}
         />
         {user && (
-          <Layout>
-            <Outlet />
-          </Layout>
+          <PlayerProvider accessToken={accessToken}>
+            <Layout>
+              <Outlet />
+            </Layout>
+          </PlayerProvider>
         )}
         {!user && <Signin />}
         <ScrollRestoration />
         <Scripts />
-        <LiveReload />
       </body>
     </html>
   )

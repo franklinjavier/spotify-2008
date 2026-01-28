@@ -13,3 +13,4 @@ node_modules
 .jest/
 .DS_Store
 tailwind.css
+.react-router/

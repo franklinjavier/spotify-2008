@@ -3,11 +3,14 @@ import { UserArea } from './user-area'
 
 export function Signin() {
   return (
-    <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
-      <div className="text-center">
-        <Title>Spotify 2008</Title>
-        <p className="mt-6 text-lg leading-8 text-muted">Spotify's best UX/UI of all time!</p>
-        <UserArea />
+    <div className="min-h-screen flex items-center justify-center bg-background-dark">
+      <div className="flex items-center gap-6 flex-col text-center">
+        <img alt="spotify logo" className="drop-shadow-lg" src="/logo.png" width={120} />
+        <div>
+          <Title className="text-2xl mb-2">Spotify 2008</Title>
+          <p className="text-sm text-muted">The best UX/UI of all time!</p>
+        </div>
+        <UserArea className="mt-2" />
       </div>
     </div>
   )

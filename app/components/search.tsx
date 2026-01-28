@@ -1,33 +1,24 @@
-import { useFetcher, useLocation, useNavigate, useParams } from '@remix-run/react'
-import { debounce } from '~/lib/debounce'
+import { useFetcher, useSearchParams, useSubmit } from 'react-router'
+import { Search as SearchIcon } from 'lucide-react'
 
 export function Search() {
-  const location = useLocation()
-  const navigate = useNavigate()
+  const submit = useSubmit()
   const fetcher = useFetcher()
-  const minLength = 2
-  const params = useParams()
+  const [searchParams] = useSearchParams()
 
-  const handleChange = debounce((e: React.FormEvent<HTMLFormElement>) => {
-    const value = (e.target as HTMLInputElement)?.value?.trim()
-
-    if (
-      value.length !== 0 /* empty string should trigger the update */ &&
-      minLength &&
-      value.length < minLength /* Do not trigger the update if the string has more than the minimum value. */
-    ) {
-      return false
-    }
-
-    navigate(`/search/${value}`)
-  })
+  const handleChange = (e: React.FormEvent<HTMLFormElement>) => {
+    const form = e.currentTarget
+    submit(form)
+  }
 
   return (
-    <fetcher.Form autoComplete="off" key={location.key} onChange={handleChange}>
+    <fetcher.Form action="/search" autoComplete="off" className="relative flex items-center" onChange={handleChange}>
+      <SearchIcon className="absolute left-2 text-neutral-400" size={12} />
       <input
-        className="rounded-xl shadow-input shadow-neutral-600 text-[12px] text-neutral-900 px-2 py-0.5 focus:outline-none"
-        defaultValue={params.q ?? ''}
-        name="search"
+        className="w-44 rounded-full bg-white text-[11px] text-neutral-800 pl-7 pr-3 py-1 focus:outline-none focus:ring-2 focus:ring-accent/50 placeholder:text-neutral-400"
+        defaultValue={searchParams.get('q') ?? ''}
+        name="q"
+        placeholder="Search"
         type="text"
       />
     </fetcher.Form>

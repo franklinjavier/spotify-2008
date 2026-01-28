@@ -1,12 +1,22 @@
-import type { ActionFunctionArgs } from '@remix-run/node'
-import { redirect } from '@remix-run/node'
+import type { Route } from './+types/auth.spotify'
+import { redirect } from 'react-router'
 
-import { authenticator } from '~/services/auth'
+import { createAuthorizationURL } from '~/services/auth'
+import { getSession, commitSession } from '~/services/session'
 
 export function loader() {
-  return redirect('/login')
+  throw redirect('/login')
 }
 
-export async function action({ request }: ActionFunctionArgs) {
-  return await authenticator.authenticate('spotify', request)
+export async function action({ request }: Route.ActionArgs) {
+  const { url, state } = await createAuthorizationURL(request)
+
+  const session = await getSession(request)
+  session.set('oauth_state', state)
+
+  return redirect(url.toString(), {
+    headers: {
+      'Set-Cookie': await commitSession(session),
+    },
+  })
 }

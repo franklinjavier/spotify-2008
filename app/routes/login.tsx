@@ -1,26 +1,25 @@
-import type { LoaderFunctionArgs } from '@remix-run/node'
-import { redirect } from '@remix-run/node'
-import { Form } from '@remix-run/react'
+import type { Route } from './+types/login'
+import { redirect, Form } from 'react-router'
 import { KeyRound } from 'lucide-react'
 
-import { authenticator } from '~/services/auth'
+import { isAuthenticated } from '~/services/auth'
 
-export function meta() {
+export function meta(): Route.MetaDescriptors {
   return [{ title: 'Log in to your account' }]
 }
 
-export async function loader({ request }: LoaderFunctionArgs) {
-  const user = await authenticator.isAuthenticated(request)
+export async function loader({ request }: Route.LoaderArgs) {
+  const user = await isAuthenticated(request)
   if (user) {
-    return redirect('/')
+    throw redirect('/')
   }
-  return true
+  return {}
 }
 
 export default function Login() {
   return (
     <Form
-      action="/auth"
+      action="/auth/spotify"
       className="m-auto flex h-screen w-80 flex-col items-center justify-center gap-4"
       method="post"
     >
