@@ -17,7 +17,7 @@
     "typegen": "react-router typegen"
   },
   "dependencies": {
-    "@react-router/fs-routes": "^7.13.0",
+    "@react-router/fs-routes": "^7.13.1",
     "@react-router/node": "^7",
     "@react-router/serve": "^7",
     "@spotify/web-api-ts-sdk": "^1",
