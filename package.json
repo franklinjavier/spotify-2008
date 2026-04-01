@@ -35,7 +35,7 @@
   "devDependencies": {
     "@react-router/dev": "^7",
     "@types/jsonwebtoken": "^9",
-    "@types/node": "^22",
+    "@types/node": "^25",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "autoprefixer": "^10",
